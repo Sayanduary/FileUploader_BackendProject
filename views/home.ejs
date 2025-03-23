@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>File Upload</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <style>
+    /* Custom styling for buttons and modal */
+    .pop {
+      background: rgba(0, 0, 0, 0.2);
+      /* Light backdrop */
+      border-radius: 8px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .file-upload-card {
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background-color: white;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white h-screen flex items-center justify-center">
+
+  <main class="w-full max-w-2xl p-8 bg-white dark:bg-gray-800 rounded-xl shadow-xl space-y-6">
+    <!-- Upload Button -->
+    <button
+      class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg w-full transition duration-200 transform hover:scale-105 flex items-center justify-center space-x-2"
+      onclick="showPopUp()">
+      <i class="ri-upload-2-line text-lg"></i>
+      <span>Upload File</span>
+    </button>
+
+    <!-- Pop-up (Hidden by default) -->
+    <div class="pop hidden fixed inset-0 flex items-center justify-center z-50">
+      <div class="relative file-upload-card p-6 w-96">
+        <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onclick="hidePopUp()">
+          <i class="ri-close-line text-2xl"></i>
+        </button>
+
+        <h3 class="text-2xl font-semibold text-center mb-4 text-gray-900">Upload Your File</h3>
+
+        <form action="/upload" method="post" enctype="multipart/form-data" class="space-y-6">
+          <div
+            class="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-500 dark:hover:bg-gray-600 transition"
+            onclick="document.getElementById('dropzone-file').click();">
+            <div class="flex flex-col items-center justify-center space-y-4 p-6">
+              <svg class="w-12 h-12 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 20 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+              </svg>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Drag and drop or click to upload</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG, or GIF (Max: 800x400px)</p>
+            </div>
+            <input id="dropzone-file" type="file" class="hidden" name="file" />
+          </div>
+
+          <div class="flex justify-center">
+            <button type="submit"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition duration-200">Upload</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Flowbite JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+  <script>
+    // Function to show the pop-up modal
+    const showPopUp = () => {
+      document.querySelector('.pop').classList.remove('hidden');
+      document.querySelector('.pop').classList.add('flex');
+    }
+
+    // Function to hide the pop-up modal
+    const hidePopUp = () => {
+      document.querySelector('.pop').classList.remove('flex');
+      document.querySelector('.pop').classList.add('hidden');
+    }
+  </script>
+
+</body>
+
+</html>
